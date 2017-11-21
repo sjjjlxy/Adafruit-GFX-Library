@@ -30,6 +30,9 @@ class Adafruit_GFX : public Print {
   virtual void endWrite(void);
   virtual void drawEllipse(int16_t x0, int16_t y0, int16_t a,int16_t b,uint16_t color);//emmmmm
 
+
+  //画任意大小形状的五角星
+  virtual void Adafruit_GFX::Pentagram(int16_t x0, int16_t y0, int16_t r, uint16_t color);
   // CONTROL API
   // These MAY be overridden by the subclass to provide device-specific
   // optimized code.  Otherwise 'generic' versions are used.
