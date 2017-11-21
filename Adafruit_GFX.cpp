@@ -340,6 +340,44 @@ void Adafruit_GFX::drawRect(int16_t x, int16_t y, int16_t w, int16_t h,
     endWrite();
 }
 
+//ª≠Õ÷‘≤
+void Adafruit_GFX::drawEllipse(int16_t x0, int16_t y0, int16_t a,int16_t b,
+	uint16_t color) {
+	int16_t f = 1 - a;
+	int16_t ddF_x = 1;
+	int16_t ddF_y = -2 * a;
+	int16_t x = 0;
+	int16_t y = a;
+
+	startWrite();
+	writePixel(x0, y0 + a, color);
+	writePixel(x0, y0 - a, color);
+	writePixel(x0 + b, y0, color);
+	writePixel(x0 - b, y0, color);
+
+	while (x<y) {
+		if (f >= 0) {
+			y--;
+			ddF_y += 2;
+			f += ddF_y;
+		}
+		x++;
+		ddF_x += 2;
+		f += ddF_x;
+
+		writePixel(x0 + x, y0 + y, color);
+		writePixel(x0 - x, y0 + y, color);
+		writePixel(x0 + x, y0 - y, color);
+		writePixel(x0 - x, y0 - y, color);
+		writePixel(x0 + y, y0 + x, color);
+		writePixel(x0 - y, y0 + x, color);
+		writePixel(x0 + y, y0 - x, color);
+		writePixel(x0 - y, y0 - x, color);
+	}
+	endWrite();
+}
+
+
 // Draw a rounded rectangle
 void Adafruit_GFX::drawRoundRect(int16_t x, int16_t y, int16_t w,
         int16_t h, int16_t r, uint16_t color) {
